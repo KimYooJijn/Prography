@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주소록 삭제</title>
+</head>
+<body>
+    <b>{{ data.name }}</b> 정보를 삭제하겠습니까?
+    <form action="{% url 'addrbook:del' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ data.id }}">
+        <button type="button" onclick="location.href='{% url 'addrbook:view' %}?id={{ data.id }}'">취소</button>
+        <button type="submit">확인</button>
+    </form>
+</body>
+</html>

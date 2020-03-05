@@ -1,0 +1,80 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}스케쥴 페이지{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' with active='schedule' %}
+{% endblock %}
+
+{% block center_content %}
+    <section>
+        <div>
+            <button type="button"
+                    onclick="location.href='{% url 'schedule:add' %}'">일정추가</button>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>시작일자</th>
+                    <th>시작시간</th>
+                </tr>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td><a href="{% url 'schedule:view' %}?id={{ row.id }}">
+                            {{ row.title }}</a></td>
+                        <td>{{ row.st_date|date:'Y-m-d' }}</td>
+                        <td>{{ row.st_time|date:'h:i:s' }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div>
+            <ul class="pagination">
+                {% if data.has_previous %}
+                    <li class="page-item">
+                        <a href="{% url 'schedule:index' %}?page={{ data.previous_page_number }}" class="page-link">이전</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">이전</a>
+                    </li>
+                {% endif %}
+                {% for page_num in page_range %}
+                    <li class="page-item {% if data.number == page_num %}active{% endif %}">
+                        <a href="{% url 'schedule:index' %}?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                    </li>
+                {% endfor %}
+                {% if data.has_next %}
+                    <li class="page-item">
+                        <a href="{% url 'schedule:index' %}?page={{ data.next_page_number }}" class="page-link">다음</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">다음</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div>
+            <form action="/schedule/" method="GET">
+                <div>
+                    <select name="flag">
+                        <option value="PRO">약속</option>
+                        <option value="MIT">회의</option>
+                        <option value="ANN">기념일</option>
+                        <option value="VAC">휴가</option>
+                    </select>
+                    <select name="s_type">
+                        <option value="title__contains">제목</option>
+                        <option value="st_date">날짜</option>
+                    </select>
+                    <input type="text" name="s_value">
+                    <button type="submit">검색</button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

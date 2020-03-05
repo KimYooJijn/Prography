@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주소록 추가</title>
+</head>
+<body>
+    <header></header>
+    <section>
+        <form action="{% url 'addrbook:add' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label>이름 : </label><input type="text" name="name" required>
+            </div>
+            <div>
+                <label>회사명 : </label><input type="text" name="company">
+            </div>
+            <div>
+                <label>나이 : </label><input type="number" max="150" name="age">
+            </div>
+            <div>
+                <label>관계 : </label><input type="text" name="relation">
+            </div>
+            <div>
+                <label>전화번호 : </label><input type="text" name="phone_addr" required>
+            </div>
+            <div>
+                <label>이메일 : </label><input type="text" name="email">
+            </div>
+            <div>
+                <label>생년월일 : </label><input type="date" name="brithday" value="{% now 'Y-m-d' %}">
+            </div>
+            <div>
+                <button type="submit">저장</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

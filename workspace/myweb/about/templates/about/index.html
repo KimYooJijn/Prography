@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>about App 입니다.</title>
+</head>
+<body>
+    {# 주석 내용 | 한줄 주석 #}
+    {% comment %}
+        주석 내용 | 블록 주석
+    {% endcomment %}
+    <h1>{{ key }}<h1>
+    <p>{{ int }}</p>
+    <div>{{ list }} | {{ list.0 }} | {{ list.1 }}</div>
+    <div>{{ dict }} | {{ dict.a }} | {{ dict.b }}</div>
+    {% for x in list %}
+        <li>{{ x }}</li>
+    {% endfor %}
+    {% for x in dict.values %}
+        <a href="#">{{ x }}</a><br>
+    {% endfor %}
+    {% if int %}
+        <p>참이면 실행</p>
+    {% else %}
+        <p>거짓이면 실행</p>
+    {% endif %}
+    {% if int >= 10000 %}
+        <p>10000 보다 크거나 같으면 실행</p>
+    {% else %}
+        <p>10000 보다 작으면 실행</p>
+    {% endif %}
+    <p>{% now 'Y-m-d' %}</p>
+    <p>{% now 'Y-m-d D' %}</p>
+    <p>{% now 'Y-m-d l' %}</p>
+    <p>{% now 'Y-m-d M' %}</p>
+    <p>{% now 'Y-m-d F' %}</p>
+    <p>{% now 'Y-m-d A h:i:s' %}</p>
+    <p>{% now 'Y-m-d A h:i:s.u' %}</p>
+    <div>
+        {% autoescape off %}
+            {{ htm_code }}
+        {% endautoescape %}
+    </div>
+    {{ create_date|date:'Y/m/d' }} -> 2010/01/20
+    {{ other|default:'데이터 없음' }}
+</body>
+</html>

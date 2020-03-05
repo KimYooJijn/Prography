@@ -1,0 +1,44 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}나의정보{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' %}
+{% endblock %}
+
+{% block center_content %}
+    <div class="container">
+        <div class="card border-dark">
+            <div class="card-body text-dark">
+                <h4 class="card-title text-center">나의정보</h4>
+                <form action="{% url 'userinfo' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" value="{{ user.username }}" placeholder="USERNAME" disabled>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control {% if error %}is-invalid{% endif %}"
+                               name="password" placeholder="PASSWORD">
+                        {% if error %}
+                            <div class="invalid-feedback">{{ message }}</div>
+                        {% else %}
+                            <small class="form-text text-muted">정보 수정을 위해 패스워드를 입력하세요.</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" value="{{ user.email }}" placeholder="E-MAIL">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" placeholder="LAST NAME">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" placeholder="FIRST NAME">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">정보수정</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

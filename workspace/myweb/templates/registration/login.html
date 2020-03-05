@@ -1,0 +1,37 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}로그인{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' %}
+{% endblock %}
+
+{% block center_content %}
+    <div class="container">
+        <div class="card border-dark">
+            <div class="card-body text-dark">
+                <h4 class="card-title text-center">로그인</h4>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value={{ next }}>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" value="{{ username }}" placeholder="USERNAME">
+                        <small class="form-text text-muted">사용자 이름을 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control {% if form.errors %}is-invalid{% endif %}"
+                               name="password" placeholder="PASSWORD">
+                        {% if form.errors %}
+                            <div class="invalid-feedback">사용자 이름 및 패스워드를 확인하세요.</div>
+                        {% else %}
+                            <small class="form-text text-muted">패스워드를 입력하세요.</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

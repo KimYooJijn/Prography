@@ -1,0 +1,52 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}회원가입{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' %}
+{% endblock %}
+
+{% block center_content %}
+    <div class="container">
+        <div class="card border-dark">
+            <div class="card-body text-dark">
+                <h4 class="card-title text-center">회원가입</h4>
+                <form action="{% url 'join' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" value="{{ username }}" placeholder="USERNAME">
+                        <small class="form-text text-muted">사용자 이름을 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control {% if error %}is-invalid{% endif %}"
+                               name="password" placeholder="PASSWORD">
+                        {% if error %}
+                            <div class="invalid-feedback">{{ message }}</div>
+                        {% else %}
+                            <small class="form-text text-muted">패스워드를 입력하세요.</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="pass_chk" placeholder="PASSWORD CHECK">
+                        <small class="form-text text-muted">패스워드를 한번 더 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" value="{{ email }}" placeholder="E-MAIL">
+                        <small class="form-text text-muted">이메일 주소를 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="last_name" value="{{ last_name }}" placeholder="LAST NAME">
+                        <small class="form-text text-muted">성을 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="first_name" value="{{ first_name }}" placeholder="FIRST NAME">
+                        <small class="form-text text-muted">이름을 입력하세요.</small>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">가입</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

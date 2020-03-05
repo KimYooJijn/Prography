@@ -1,0 +1,69 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}게시판{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' with active='board' %}
+{% endblock %}
+
+{% block center_content %}
+    <div class="container">
+        <div>
+            <h1 class="display-3">{{ data.title }}</h1>
+        </div>
+        <div>
+            <small>
+                작성자 : {{ data.username }}<br>
+                작성일 : {{ data.create_date|date:'Y년 m월 d일 H시 i분 s초' }}<br>
+                수정일 : {{ data.update_date|date:'Y년 m월 d일 H시 i분 s초' }}<br>
+                조회수 : {{ data.view_cnt }}
+            </small>
+        </div>
+        <div>
+            {{ data.content|safe }}
+        </div>
+        <div>
+            <a href="/media/{{ data.upload_file }}" download>{{ data.upload_file }}</a>
+        </div>
+        <div class="form-group text-center">
+            <button type="button" class="btn btn-primary"
+                    onclick="location.href='{% url 'board:good' %}?id={{ data.id }}'">
+                    추천[{{ data.good_cnt }}]</button>
+            <button type="button" class="btn btn-danger"
+                    onclick="location.href='{% url 'board:bad' %}?id={{ data.id }}'">
+                    비추천[{{ data.bad_cnt }}]</button>
+        </div>
+
+        <div class="form-group">
+            <form action="{% url 'board:comment' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="board_id" value="{{ data.id }}">
+                <div class="form-group">
+                    <textarea class="form-control" name="content"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-info">댓글</button>
+                </div>
+            </form>
+            {% for comment in comments %}
+                <div class="card">
+                    <div class="card-body">
+                        <small class="card-title">{{ comment.username }}</small>
+                        <p class="card-text">
+                            {{ comment.content }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group text-right">
+            <button type="button" class="btn btn-outline-info"
+                    onclick="location.href='{% url 'board:index' %}'">목록</button>
+            <button type="button" class="btn btn-outline-warning"
+                    onclick="location.href='{% url 'board:mod' %}?id={{ data.id }}'">수정</button>
+            <button type="button" class="btn btn-outline-danger"
+                    onclick="location.href='{% url 'board:del' %}?id={{ data.id }}'">삭제</button>
+        <div>
+    </div>
+{% endblock %}

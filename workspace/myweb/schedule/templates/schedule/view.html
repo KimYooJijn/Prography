@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 정보 - {{ data.title }}</title>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <th>제목</th>
+                <td>{{ data.title }}</td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td>{{ data.content }}</td>
+            </tr>
+            <tr>
+                <th>구분</th>
+                <td>
+                    <select name='flag' disabled>
+                        <option value="PRO" {% if data.flag == 'PRO' %}selected{% endif %}>약속</option>
+                        <option value="MIT" {% if data.flag == 'MIT' %}selected{% endif %}>회의</option>
+                        <option value="ANN" {% if data.flag == 'ANN' %}selected{% endif %}>기념일</option>
+                        <option value="VAC" {% if data.flag == 'VAC' %}selected{% endif %}>휴가</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>시작일자</th>
+                <td>{{ data.st_date|date:'Y년 m월 d일' }}</td>
+            </tr>
+            <tr>
+                <th>시작시간</th>
+                <td>{{ data.st_time|date:'a h:i' }}</td>
+            </tr>
+            <tr>
+                <th>종료일자</th>
+                <td>{{ data.ed_date|date:'Y년 m월 d일' }}</td>
+            </tr>
+            <tr>
+                <th>종료시간</th>
+                <td>{{ data.ed_time|date:'a h:i' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button onclick="location.href='{% url 'schedule:index' %}'">목록</button>
+        <button onclick="location.href='{% url 'schedule:mod' %}?id={{ data.id }}'">수정</button>
+        <button onclick="location.href='{% url 'schedule:del' %}?id={{ data.id }}'">삭제</button>
+    </div>
+</body>
+</html>

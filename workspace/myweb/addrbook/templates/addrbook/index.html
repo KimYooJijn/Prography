@@ -1,0 +1,31 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}주소록 페이지{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' %}
+{% endblock %}
+
+{% block center_content %}
+    <section>
+        <div>
+            <button type="button"
+                    onclick="location.href='{% url 'addrbook:add' %}'">주소록 추가</button>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                </tr>
+                {% for row in data %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td><a href="{% url 'addrbook:view' %}?id={{ row.id }}">
+                            {{ row.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}

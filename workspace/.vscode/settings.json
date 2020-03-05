@@ -1,0 +1,14 @@
+{
+    "editor.fontSize": 24,
+    "editor.fontFamily": "D2Coding, Consolas, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "workbench.tree.indent": 16,
+    "workbench.list.openMode": "doubleClick",
+    "editor.fontWeight": "bold",
+    "explorer.compactFolders": false,
+    "terminal.integrated.fontSize": 24,
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    "python.pythonPath": "C:\\Users\\dbwls.LAPTOP-CG1VC2N6\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주소록 수정</title>
+</head>
+<body>
+    <header></header>
+    <section>
+        <form action="{% url 'addrbook:mod' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ data.id }}">
+            <div>
+                <label>이름 : </label><input type="text" name="name" value="{{ data.name }}" required>
+            </div>
+            <div>
+                <label>회사명 : </label><input type="text" value="{{ data.company }}" name="company">
+            </div>
+            <div>
+                <label>나이 : </label><input type="number" value="{{ data.age }}" max="150" name="age">
+            </div>
+            <div>
+                <label>관계 : </label><input type="text" value="{{ data.relation }}" name="relation">
+            </div>
+            <div>
+                <label>전화번호 : </label><input type="text" value="{{ data.phone_addr }}" name="phone_addr" required>
+            </div>
+            <div>
+                <label>이메일 : </label><input type="text" value="{{ data.email }}" name="email">
+            </div>
+            <div>
+                <label>생년월일 : </label><input type="date" value="{{ data.brithday|date:'Y-m-d' }}" name="brithday">
+            </div>
+            <div>
+                <button type="submit">저장</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

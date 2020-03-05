@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 추가</title>
+</head>
+<body>
+    <header></header>
+    <section>
+        <form action="{% url 'schedule:add' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label>제목 : </label>
+                <input type="text" name="title" required>
+            </div>
+            <div>
+                <label>내용 : </label>
+                <textarea name="content" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+                <label>구분</label>
+                <select name='flag'>
+                    <option value="PRO">약속</option>
+                    <option value="MIT">회의</option>
+                    <option value="ANN">기념일</option>
+                    <option value="VAC">휴가</option>
+                </select>
+            </div>
+            <div>
+                <label>시작일자</label>
+                <input type="date" name="st_date" value="{% now 'Y-m-d' %}">
+            </div>
+            <div>
+                <label>시작시간</label>
+                <input type="time" name="st_time" value="{% now 'H:i' %}">
+            </div>
+            <div>
+                <label>종료일자</label>
+                <input type="date" name="ed_date" value="{% now 'Y-m-d' %}">
+            </div>
+            <div>
+                <label>종료시간</label>
+                <input type="time" name="ed_time" value="{% now 'H:i' %}">
+            </div>
+            <div>
+                <button type="submit">저장</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

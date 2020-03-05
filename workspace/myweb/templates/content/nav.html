@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#topnav" aria-controls="topnav" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="topnav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if active == 'home' %}active{% endif %}">
+                <a href="{% url 'index' %}" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item {% if active == 'addrbook' %}active{% endif %}">
+                <a href="{% url 'addrbook:index' %}" class="nav-link">주소록</a>
+            </li>
+            <li class="nav-item {% if active == 'schedule' %}active{% endif %}">
+                <a href="{% url 'schedule:index' %}" class="nav-link">스케쥴</a>
+            </li>
+            <li class="nav-item {% if active == 'board' %}active{% endif %}">
+                <a href="{% url 'board:index' %}" class="nav-link">게시판</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">로그아웃</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'userinfo' %}" class="nav-link">나의정보</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">로그인</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'join' %}" class="nav-link">회원가입</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

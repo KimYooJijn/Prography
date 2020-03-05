@@ -1,0 +1,35 @@
+{% extends 'layout/3row.html' %}
+
+{% block title %}글쓰기{% endblock %}
+
+{% block header %}
+    {% include 'content/nav.html' with active='board' %}
+{% endblock %}
+
+{% block center_content %}
+    <div class="container">
+        <form action="{% url 'board:add' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" class="form-control" name="title"
+                       placeholder="제목" required>
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="b_type">
+                    <option value="00">공지사항</option>
+                    <option value="01">자유게시판</option>
+                    <option value="02">토론게시판</option>
+                </select>
+            </div>
+            <div class="form-group">
+                {{ form.content }}
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="upload_file">
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-outline-primary">작성</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 수정</title>
+</head>
+<body>
+    <header></header>
+    <section>
+        <form action="{% url 'schedule:mod' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ data.id }}">
+            <div>
+                <label>제목 : </label>
+                <input type="text" name="title" value="{{ data.title }}" required>
+            </div>
+            <div>
+                <label>내용 : </label>
+                <textarea name="content" cols="30" rows="10">{{ data.content }}</textarea>
+            </div>
+            <div>
+                <label>구분</label>
+                <select name='flag'>
+                    <option value="PRO" {% if data.flag == 'PRO' %}selected{% endif %}>약속</option>
+                    <option value="MIT" {% if data.flag == 'MIT' %}selected{% endif %}>회의</option>
+                    <option value="ANN" {% if data.flag == 'ANN' %}selected{% endif %}>기념일</option>
+                    <option value="VAC" {% if data.flag == 'VAC' %}selected{% endif %}>휴가</option>
+                </select>
+            </div>
+            <div>
+                <label>시작일자</label>
+                <input type="date" name="st_date" value="{{ data.st_date|date:'Y-m-d' }}">
+            </div>
+            <div>
+                <label>시작시간</label>
+                <input type="time" name="st_time" value="{{ data.st_time|date:'H:i' }}">
+            </div>
+            <div>
+                <label>종료일자</label>
+                <input type="date" name="ed_date" value="{{ data.ed_date|date:'Y-m-d' }}">
+            </div>
+            <div>
+                <label>종료시간</label>
+                <input type="time" name="ed_time" value="{{ data.ed_time|date:'H:i' }}">
+            </div>
+            <div>
+                <button type="submit">수정</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

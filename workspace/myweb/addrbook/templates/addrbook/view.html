@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주소록 정보 - {{ data.name }}</title>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <th>이름</th>
+                <td>{{ data.name }}</td>
+            </tr>
+            <tr>
+                <th>회사</th>
+                <td>{{ data.company }}</td>
+            </tr>
+            <tr>
+                <th>나이</th>
+                <td>{{ data.age }}</td>
+            </tr>
+            <tr>
+                <th>관계</th>
+                <td>{{ data.relation }}</td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td>{{ data.phone_addr }}</td>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td>{{ data.email }}</td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td>{{ data.brithday }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button onclick="location.href='{% url 'addrbook:index' %}'">목록</button>
+        <button onclick="location.href='{% url 'addrbook:mod' %}?id={{ data.id }}'">수정</button>
+        <button onclick="location.href='{% url 'addrbook:del' %}?id={{ data.id }}'">삭제</button>
+    </div>
+</body>
+</html>
